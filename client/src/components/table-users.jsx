@@ -8,6 +8,7 @@ const TableUsers = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState();
+
   useEffect(() => {
     async function getUsers() {
       const response = await axios.get("http://localhost:3333/users");
@@ -46,23 +47,27 @@ const TableUsers = () => {
           <tr>
             <td>{user.name}</td>
             <td>{user.email}</td>
-            <td className="flex-between">
-              <div>
-                <Trash2 />
-              </div>
-              <button
-                onClick={() => {
-                  setSelectedUser({
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                  });
+            <td className="flex-center">
+              <div className="flex-between">
+                <button id="actions" className="trash">
+                  <Trash2 size={20} />
+                </button>
+                <button
+                  className="edit"
+                  id="actions"
+                  onClick={() => {
+                    setSelectedUser({
+                      id: user.id,
+                      name: user.name,
+                      email: user.email,
+                    });
 
-                  setIsOpen(true);
-                }}
-              >
-                <SquarePen />
-              </button>
+                    setIsOpen(true);
+                  }}
+                >
+                  <SquarePen size={20} />
+                </button>
+              </div>
             </td>
           </tr>
         ))}

@@ -31,6 +31,20 @@ button#submit {
   width: 100%;
 }
 
+button#actions {
+  width: fit-content;
+  height: fit-content;
+  padding: 6px;
+}
+
+.edit {
+  background-color: green;
+}
+
+.trash {
+  background-color: red;
+}
+
 button:hover {
   scale: 1.03;
 }
@@ -39,6 +53,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
+  margin-top: 50px;
 }
 
 th,
@@ -72,10 +87,18 @@ select {
   background: #3b3b3b;
 }
 
+.flex-center {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+}
+
 .flex-between {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 30px;
+  align-items: center;
 }
 
 .modal {
