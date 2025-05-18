@@ -31,10 +31,27 @@ button#submit {
   width: 100%;
 }
 
+button#visible {
+  width: fit-content;
+  padding: 0;
+  background: transparent;
+}
+
 button#actions {
   width: fit-content;
   height: fit-content;
   padding: 6px;
+}
+
+.box-input {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 12px;
+  align-items: center;
+  background-color: #3b3b3b;
 }
 
 .edit {
@@ -43,6 +60,10 @@ button#actions {
 
 .trash {
   background-color: red;
+}
+
+.icon {
+  margin-right: 10px;
 }
 
 button:hover {
