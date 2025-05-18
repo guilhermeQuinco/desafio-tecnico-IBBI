@@ -44,7 +44,6 @@ export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
     user ? updateUser() : createUser();
   };
 
