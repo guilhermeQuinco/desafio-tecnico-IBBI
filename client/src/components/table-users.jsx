@@ -7,7 +7,7 @@ import Modal from "./modal";
 const TableUsers = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [users, setUsers] = useState([]);
-
+  const [selectedUser, setSelectedUser] = useState();
   useEffect(() => {
     async function getUsers() {
       const response = await axios.get("http://localhost:3333/users");
@@ -22,40 +22,58 @@ const TableUsers = () => {
 
   function onCloseModal() {
     setIsOpen(false);
+    setSelectedUser(false);
   }
 
-  function addNewUser() {
+  function handleCreate() {
+    setSelectedUser(null);
     setIsOpen(true);
   }
 
+  console.log(selectedUser);
+
   return (
     <div className="container">
-      <button onClick={addNewUser}>Novo</button>
+      <button onClick={handleCreate}>Novo</button>
       <table>
         <tr>
           <th>Nome</th>
           <th>Email</th>
           <th>Opções</th>
         </tr>
-        <tr>
-          {users.map((user) => (
-            <>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td className="flex-between">
-                <div>
-                  <Trash2 />
-                </div>
-                <div>
-                  <SquarePen />
-                </div>
-              </td>
-            </>
-          ))}
-        </tr>
+
+        {users.map((user) => (
+          <tr>
+            <td>{user.name}</td>
+            <td>{user.email}</td>
+            <td className="flex-between">
+              <div>
+                <Trash2 />
+              </div>
+              <button
+                onClick={() => {
+                  setSelectedUser({
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                  });
+
+                  setIsOpen(true);
+                }}
+              >
+                <SquarePen />
+              </button>
+            </td>
+          </tr>
+        ))}
       </table>
 
-      <Modal isOpen={isOpen} onClose={onCloseModal} />
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onClose={onCloseModal}
+        user={selectedUser || null}
+      />
     </div>
   );
 };

@@ -30,3 +30,20 @@ app.get("/users", async (req, res) => {
   const users = await prisma.user.findMany();
   res.send(users);
 });
+
+app.patch("/users/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const { name, email } = req.body;
+
+  const numberedId = parseInt(id);
+
+  const user = await prisma.user.update({
+    where: { id: numberedId },
+    data: {
+      name,
+      email,
+    },
+  });
+  res.send(`Usuário Atualizado com sucesso: ${user}`);
+});
