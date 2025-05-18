@@ -16,6 +16,7 @@ export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
 
     setName(user?.name ?? "");
     setEmail(user?.email ?? "");
+    setPassword(user?.password ?? "");
     setStatus(user?.status ?? "");
   }, [isOpen, user]);
 
@@ -25,6 +26,7 @@ export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
       await axios.post("http://localhost:3333/users", {
         name,
         email,
+        password,
         status,
       });
       setIsLoading(false);
@@ -48,7 +50,7 @@ export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
     }
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     user ? updateUser() : createUser();
   };
 
@@ -78,7 +80,13 @@ export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
               value={password}
             />
 
-            <button onClick={() => setIsVisible((prev) => !prev)} id="visible">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setIsVisible((prev) => !prev);
+              }}
+              id="visible"
+            >
               {isVisible ? (
                 <EyeClosed className="icon" color="#fff" />
               ) : (

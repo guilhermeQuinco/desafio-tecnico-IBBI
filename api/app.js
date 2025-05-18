@@ -10,13 +10,15 @@ app.use(express.json());
 app.use(cors());
 
 app.post("/users", async (req, res) => {
-  const { name, email } = req.body;
+  const { name, email, password, status } = req.body;
 
   try {
     await prisma.user.create({
       data: {
         name,
         email,
+        password,
+        status,
       },
     });
 
@@ -34,7 +36,7 @@ app.get("/users", async (req, res) => {
 app.patch("/users/:id", async (req, res) => {
   const { id } = req.params;
 
-  const { name, email } = req.body;
+  const { name, email, password, status } = req.body;
 
   const numberedId = parseInt(id);
 
@@ -43,7 +45,22 @@ app.patch("/users/:id", async (req, res) => {
     data: {
       name,
       email,
+      password,
+      status,
     },
   });
   res.send(`Usuário Atualizado com sucesso: ${user}`);
+});
+
+app.delete("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  const numberedId = parseInt(id);
+
+  await prisma.user.delete({
+    where: {
+      id: numberedId,
+    },
+  });
+
+  res.send("Usuário deletado com sucesso");
 });
