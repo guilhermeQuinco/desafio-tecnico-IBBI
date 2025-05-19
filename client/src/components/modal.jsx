@@ -2,8 +2,16 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Eye } from "lucide-react";
 import { EyeClosed } from "lucide-react";
+import { BASE_URL } from "../constants";
 
-export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
+export const Modal = ({
+  title,
+  isOpen,
+  setIsOpen,
+  onClose,
+  user = null,
+  refreshUsers,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,42 +29,70 @@ export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
   }, [isOpen, user]);
 
   const createUser = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      await axios.post("http://localhost:3333/users", {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      await axios.post(BASE_URL, {
         name,
         email,
         password,
         status,
       });
-      setIsLoading(false);
-      router;
+      await refreshUsers();
+      setIsOpen(false);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const updateUser = async () => {
     try {
       setIsLoading(true);
-      await axios.patch(`http://localhost:3333/users/${user.id}`, {
+
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      await axios.patch(`${BASE_URL}/${user.id}`, {
         name,
         email,
+        password,
+        status,
       });
-      setIsLoading(false);
-      router;
+      await refreshUsers();
+
+      setIsOpen(false);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     user ? updateUser() : createUser();
   };
 
   return (
     <div className={`modal ${isOpen ? "open" : ""}`} onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+        <div
+          onClick={onClose}
+          style={{
+            background: "transparent",
+            width: "100%",
+            height: "fit-content",
+            padding: "0",
+            textAlign: "right",
+            cursor: "pointer",
+            color: "#fff",
+          }}
+        >
+          <span>X</span>
+        </div>
+        <h1 style={{ textAlign: "center", color: "#fff" }}>{title}</h1>
         <form onSubmit={onSubmit}>
           <input
             type="text"
@@ -95,13 +131,13 @@ export const Modal = ({ isOpen, setIsOpen, onClose, user = null }) => {
             </button>
           </div>
 
-          <select onChange={(e) => setStatus(e.target.value)}>
-            <option value="">Selecione uma Opção</option>
+          <select onChange={(e) => setStatus(e.target.value)} value={status}>
+            <option value="">Selecione o Status</option>
             <option value="ativo">Ativo</option>
             <option value="excluído">Excluído</option>
           </select>
           <button type="submit" id="submit">
-            {isLoading ? "Loading..." : "Salvar"}
+            {isLoading ? <div class="loader"></div> : "Salvar"}
           </button>
         </form>
       </div>
