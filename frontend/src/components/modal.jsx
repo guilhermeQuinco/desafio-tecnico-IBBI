@@ -31,7 +31,7 @@ export const Modal = ({
   const createUser = async () => {
     setIsLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       await axios.post(BASE_URL, {
         name,
@@ -52,7 +52,7 @@ export const Modal = ({
     try {
       setIsLoading(true);
 
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       await axios.patch(`${BASE_URL}/${user.id}`, {
         name,
@@ -79,20 +79,24 @@ export const Modal = ({
     <div className={`modal ${isOpen ? "open" : ""}`} onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <div
-          onClick={onClose}
           style={{
             background: "transparent",
             width: "100%",
             height: "fit-content",
-            padding: "0",
-            textAlign: "right",
-            cursor: "pointer",
+            padding: "0px",
+
             color: "#fff",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          <span>X</span>
+          <h1 style={{ textAlign: "center", color: "#fff" }}>{title}</h1>
+          <span onClick={onClose} style={{ cursor: "pointer" }}>
+            X
+          </span>
         </div>
-        <h1 style={{ textAlign: "center", color: "#fff" }}>{title}</h1>
+
         <form onSubmit={onSubmit}>
           <input
             type="text"
@@ -120,6 +124,7 @@ export const Modal = ({
             />
 
             <button
+              type="button"
               onClick={(e) => {
                 e.preventDefault();
                 setIsVisible((prev) => !prev);

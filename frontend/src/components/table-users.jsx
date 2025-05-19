@@ -6,25 +6,26 @@ import Modal from "./modal";
 import { BASE_URL } from "../constants";
 
 const TableUsers = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState();
 
   async function getUsers() {
-    const response = await axios.get(BASE_URL);
-
-    setUsers(response.data);
+    try {
+      const response = await axios.get(BASE_URL);
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar usuários:", error);
+    }
   }
 
   useEffect(() => {
     getUsers();
   }, []);
 
-  console.log(users);
-
   const onCloseModal = () => {
     setIsOpen(false);
-    setSelectedUser(false);
   };
 
   const handleCreate = () => {
@@ -111,8 +112,6 @@ const TableUsers = () => {
               </tr>
             ))
           )}
-          {/*  */}
-          {}
         </tbody>
       </table>
 
