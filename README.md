@@ -1,4 +1,5 @@
 # Cadastro de Usuários
+
 Este projeto foi desenvolvido com o objetivo de atender aos requisitos do desafio técnico proposto pelo Instituto Brasileiro de Biotecnologia e Inovação (IBBI).
 
 A aplicação tem como finalidade realizar o gerenciamento de usuários, permitindo as seguintes operações:
@@ -13,32 +14,30 @@ A aplicação tem como finalidade realizar o gerenciamento de usuários, permiti
 
 Todos os dados são armazenados localmente por meio de um banco de dados SQLite, garantindo simplicidade e agilidade durante o desenvolvimento e testes da aplicação.
 
-
 ## Tecnologias utilizadas
 
 ### Front-end
- **React JS** -  Uma biblioteca JavaScript usada para criar interfaces de usuário, principalmente em sites e aplicações web. Permitindo criar interfaces de forma modular usando componentes reutilizáveis
+
+**React JS** - Uma biblioteca JavaScript usada para criar interfaces de usuário, principalmente em sites e aplicações web. Permitindo criar interfaces de forma modular usando componentes reutilizáveis
 
 ### Back-end
+
 **Express.js** - Um framework para Node.js que facilita a criação de API REST
 
 **Prisma ORM** - é uma ferramenta que facilita o uso de banco de dados com Node.js, permitindo interagir com o banco de dados de forma segura e simples
 
 **Sqlite** - Banco de dados relacional que armazena os dados localmente em um único arquivo .db, facilitando assim na hora do desenvolvimento
 
-
- 
-
-
-## Instalação 
+## Instalação
 
 1.**Clone o Repositório**
 
- ```bash
- git clone https://github.com/guilhermeQuinco/desafio-tecnico-IBBI.git
- cd desafio-tecnico-IBBI
+```bash
+git clone https://github.com/guilhermeQuinco/desafio-tecnico-IBBI.git
+cd desafio-tecnico-IBBI
 
 ```
+
 2.**Instale e execute o Back-end(http://localhost:3333)**
 
 ```bash
@@ -68,4 +67,6 @@ npm run dev
 
 ```
 
+## Exemplo de tela
 
+<img src="./screenshot.gif" alt="cadastro de usuários screenshot" width="800">
