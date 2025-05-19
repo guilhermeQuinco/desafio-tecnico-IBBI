@@ -99,13 +99,15 @@ export const Modal = ({
             placeholder="Nome"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            required
           />
 
           <input
-            type="text"
+            type="email"
             placeholder="E-mail"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            required
           />
 
           <div className="box-input">
@@ -114,6 +116,7 @@ export const Modal = ({
               placeholder="Senha"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
+              required
             />
 
             <button
@@ -131,7 +134,11 @@ export const Modal = ({
             </button>
           </div>
 
-          <select onChange={(e) => setStatus(e.target.value)} value={status}>
+          <select
+            onChange={(e) => setStatus(e.target.value)}
+            value={status}
+            required
+          >
             <option value="">Selecione o Status</option>
             <option value="ativo">Ativo</option>
             <option value="excluído">Excluído</option>
