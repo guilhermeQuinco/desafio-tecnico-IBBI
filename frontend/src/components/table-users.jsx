@@ -46,7 +46,12 @@ const TableUsers = () => {
 
   const handleDelete = async (user) => {
     try {
-      alert(`Tem certeza que deseja deletar o usuário ${user.name}?`);
+      const shouldDelete = confirm(
+        `Tem certeza que deseja deletar o usuário ${user.name}?`
+      );
+
+      if (!shouldDelete) return;
+
       await axios.delete(`${BASE_URL}/${user.id}`);
       getUsers();
     } catch (error) {
@@ -67,30 +72,47 @@ const TableUsers = () => {
         </thead>
 
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td className="flex-center">
-                <div className="flex-between">
-                  <button
-                    id="actions"
-                    className="trash"
-                    onClick={() => handleDelete(user)}
-                  >
-                    <Trash2 size={20} />
-                  </button>
-                  <button
-                    className="edit"
-                    id="actions"
-                    onClick={() => handleEdit(user)}
-                  >
-                    <SquarePen size={20} />
-                  </button>
-                </div>
+          {users.length === 0 ? (
+            <tr>
+              <td
+                colSpan="3"
+                style={{
+                  textAlign: "center",
+                  padding: "20px",
+                  height: "400px",
+                }}
+              >
+                Nenhum usuário cadastrado.
               </td>
             </tr>
-          ))}
+          ) : (
+            users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td className="flex-center">
+                  <div className="flex-between">
+                    <button
+                      id="actions"
+                      className="trash"
+                      onClick={() => handleDelete(user)}
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                    <button
+                      className="edit"
+                      id="actions"
+                      onClick={() => handleEdit(user)}
+                    >
+                      <SquarePen size={20} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
+          {/*  */}
+          {}
         </tbody>
       </table>
 
