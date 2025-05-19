@@ -4,6 +4,7 @@ import { Trash2 } from "lucide-react";
 import { SquarePen } from "lucide-react";
 import Modal from "./modal";
 import { BASE_URL } from "../constants";
+import SkeletonLoading from "./skeleton-loading";
 
 const TableUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,11 +13,15 @@ const TableUsers = () => {
   const [selectedUser, setSelectedUser] = useState();
 
   async function getUsers() {
+    setIsLoading(true);
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const response = await axios.get(BASE_URL);
       setUsers(response.data);
     } catch (error) {
       console.error("Erro ao buscar usuários:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -66,14 +71,18 @@ const TableUsers = () => {
       <table>
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Opções</th>
+            <th style={{ width: "30%" }}>Nome</th>
+            <th style={{ width: "80%" }}>Email</th>
+            <th style={{ textAlign: "right" }}>Opções</th>
           </tr>
         </thead>
 
         <tbody>
-          {users.length === 0 ? (
+          {isLoading ? (
+            <>
+              <SkeletonLoading quantity={8} />
+            </>
+          ) : users.length === 0 ? (
             <tr>
               <td
                 colSpan="3"
@@ -91,7 +100,7 @@ const TableUsers = () => {
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td className="flex-center">
+                <td>
                   <div className="flex-between">
                     <button
                       id="actions"

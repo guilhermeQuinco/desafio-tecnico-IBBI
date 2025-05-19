@@ -29,40 +29,30 @@ export const Modal = ({
   }, [isOpen, user]);
 
   const createUser = async () => {
-    setIsLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
       await axios.post(BASE_URL, {
         name,
         email,
         password,
         status,
       });
-      await refreshUsers();
       setIsOpen(false);
+      await refreshUsers();
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const updateUser = async () => {
     try {
-      setIsLoading(true);
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
       await axios.patch(`${BASE_URL}/${user.id}`, {
         name,
         email,
         password,
         status,
       });
-      await refreshUsers();
-
       setIsOpen(false);
+      await refreshUsers();
     } catch (error) {
       console.error(error);
     } finally {
