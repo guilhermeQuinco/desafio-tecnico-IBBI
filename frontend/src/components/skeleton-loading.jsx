@@ -10,6 +10,9 @@ const SkeletonLoading = ({ quantity }) => {
       <td>
         <div className="skeleton skeleton-text"></div>
       </td>
+      <td>
+        <div className="skeleton skeleton-text"></div>
+      </td>
     </tr>
   ));
 };

@@ -67,12 +67,15 @@ const TableUsers = () => {
 
   return (
     <div className="container">
-      <button onClick={handleCreate}>Novo</button>
+      <button onClick={handleCreate} style={{ fontSize: "1.2em" }}>
+        + Novo
+      </button>
       <table>
         <thead>
           <tr>
             <th style={{ width: "30%" }}>Nome</th>
-            <th style={{ width: "80%" }}>Email</th>
+            <th style={{ width: "50%" }}>Email</th>
+            <th style={{ width: "20%" }}>Status</th>
             <th style={{ textAlign: "right" }}>Opções</th>
           </tr>
         </thead>
@@ -101,19 +104,23 @@ const TableUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
+                  <span
+                    className="status"
+                    style={{
+                      background:
+                        user.status === "ativo" ? "#114911" : "#790f0f",
+                      color: user.status === "ativo" ? "#c9f5c9" : "#f7cccc",
+                    }}
+                  >
+                    {user.status}
+                  </span>
+                </td>
+                <td>
                   <div className="flex-between">
-                    <button
-                      id="actions"
-                      className="trash"
-                      onClick={() => handleDelete(user)}
-                    >
+                    <button id="actions" onClick={() => handleDelete(user)}>
                       <Trash2 size={20} />
                     </button>
-                    <button
-                      className="edit"
-                      id="actions"
-                      onClick={() => handleEdit(user)}
-                    >
+                    <button id="actions" onClick={() => handleEdit(user)}>
                       <SquarePen size={20} />
                     </button>
                   </div>
