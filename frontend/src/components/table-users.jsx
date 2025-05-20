@@ -57,6 +57,7 @@ const TableUsers = () => {
       <button onClick={handleCreate} style={{ fontSize: "1.2em" }}>
         + Novo
       </button>
+
       <table>
         <thead>
           <tr>
@@ -71,7 +72,7 @@ const TableUsers = () => {
           {users.length === 0 ? (
             <tr>
               <td
-                colSpan="3"
+                colSpan="4"
                 style={{
                   textAlign: "center",
                   padding: "20px",

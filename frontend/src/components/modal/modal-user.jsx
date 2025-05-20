@@ -91,6 +91,7 @@ export const ModalUser = ({
             onChange={(e) => setName(e.target.value)}
             value={name}
             required
+            maxLength={150}
           />
 
           <input
@@ -99,6 +100,7 @@ export const ModalUser = ({
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
+            maxLength={20}
           />
 
           <div className="box-input">
@@ -108,6 +110,7 @@ export const ModalUser = ({
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               required
+              maxLength={8}
             />
 
             <button

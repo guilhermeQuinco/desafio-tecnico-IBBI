@@ -16,7 +16,11 @@
 
 .container {
   max-width: 1280px;
-  margin: 100px auto;
+  margin: 50px auto;
+  background: #424242;
+  padding: 50px;
+  border-radius: 20px;
+  min-height: 700px;
 }
 
 .header {
