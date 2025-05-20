@@ -70,4 +70,4 @@ npm run dev
 
 ## Exemplo de tela
 
-<img src="./assets/screenshot.png" alt="cadastro de usuários screenshot" width="800">
+<img src="/assets/screenshot.png" alt="cadastro de usuários screenshot" width="800">
