@@ -34,6 +34,7 @@ Todos os dados são armazenados localmente por meio de um banco de dados SQLite,
 
 ```bash
 git clone https://github.com/guilhermeQuinco/desafio-tecnico-IBBI.git
+
 cd desafio-tecnico-IBBI
 
 ```
@@ -50,7 +51,7 @@ npm install
 npx prisma migrate dev
 
 ## Execute a api
-npm run dev
+npm run start:dev
 
 ```
 
@@ -69,4 +70,4 @@ npm run dev
 
 ## Exemplo de tela
 
-<img src="./screenshot.png" alt="cadastro de usuários screenshot" width="800">
+<img src="./assets/screenshot.png" alt="cadastro de usuários screenshot" width="800">

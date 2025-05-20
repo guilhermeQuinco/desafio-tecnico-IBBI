@@ -4,24 +4,18 @@ import { Trash2 } from "lucide-react";
 import { SquarePen } from "lucide-react";
 import Modal from "./modal";
 import { BASE_URL } from "../constants";
-import SkeletonLoading from "./skeleton-loading";
 
 const TableUsers = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState();
 
   async function getUsers() {
-    setIsLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       const response = await axios.get(BASE_URL);
       setUsers(response.data);
     } catch (error) {
       console.error("Erro ao buscar usuários:", error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -81,11 +75,7 @@ const TableUsers = () => {
         </thead>
 
         <tbody>
-          {isLoading ? (
-            <>
-              <SkeletonLoading quantity={8} />
-            </>
-          ) : users.length === 0 ? (
+          {users.length === 0 ? (
             <tr>
               <td
                 colSpan="3"
