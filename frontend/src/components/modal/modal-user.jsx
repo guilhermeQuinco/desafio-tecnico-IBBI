@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Eye } from "lucide-react";
 import { EyeClosed } from "lucide-react";
-import { BASE_URL } from "../constants";
+import { BASE_URL } from "../../constants";
 
-export const Modal = ({
+export const ModalUser = ({
   title,
   isOpen,
   setIsOpen,
@@ -12,7 +12,6 @@ export const Modal = ({
   user = null,
   refreshUsers,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,8 +54,6 @@ export const Modal = ({
       await refreshUsers();
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -139,7 +136,7 @@ export const Modal = ({
             <option value="excluído">Excluído</option>
           </select>
           <button type="submit" id="submit">
-            {isLoading ? <div class="loader"></div> : "Salvar"}
+            Salvar
           </button>
         </form>
       </div>
@@ -147,4 +144,4 @@ export const Modal = ({
   );
 };
 
-export default Modal;
+export default ModalUser;

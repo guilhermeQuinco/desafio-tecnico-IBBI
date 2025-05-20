@@ -84,6 +84,11 @@ button:hover {
   scale: 1.03;
 }
 
+.btn-delete {
+  background: #770e0e;
+  color: #ffd0d0;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -119,6 +124,14 @@ select {
   border-radius: 10px;
   border: none;
   background: #3b3b3b;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  color: #ddd;
 }
 
 .flex-center {
@@ -167,7 +180,7 @@ select {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .loader {

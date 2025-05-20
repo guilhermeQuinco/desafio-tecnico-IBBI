@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Trash2 } from "lucide-react";
+import { DeleteIcon, Trash2 } from "lucide-react";
 import { SquarePen } from "lucide-react";
-import Modal from "./modal";
+import { ModalUser } from "./modal/modal-user";
 import { BASE_URL } from "../constants";
+import { ModalDelete } from "./modal/modal-delete";
 
 const TableUsers = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState();
 
@@ -45,18 +48,8 @@ const TableUsers = () => {
   };
 
   const handleDelete = async (user) => {
-    try {
-      const shouldDelete = confirm(
-        `Tem certeza que deseja deletar o usuário ${user.name}?`
-      );
-
-      if (!shouldDelete) return;
-
-      await axios.delete(`${BASE_URL}/${user.id}`);
-      getUsers();
-    } catch (error) {
-      console.error(error);
-    }
+    setSelectedUser(user);
+    setDeleteModal(true);
   };
 
   return (
@@ -121,7 +114,14 @@ const TableUsers = () => {
         </tbody>
       </table>
 
-      <Modal
+      <ModalDelete
+        isOpen={deleteModal}
+        onClose={() => setDeleteModal(false)}
+        user={selectedUser}
+        refreshUsers={getUsers}
+      />
+
+      <ModalUser
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onClose={onCloseModal}
