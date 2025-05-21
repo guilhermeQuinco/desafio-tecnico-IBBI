@@ -76,7 +76,7 @@ const TableUsers = () => {
                 style={{
                   textAlign: "center",
                   padding: "20px",
-                  height: "400px",
+                  height: "500px",
                 }}
               >
                 Nenhum usuário cadastrado.
